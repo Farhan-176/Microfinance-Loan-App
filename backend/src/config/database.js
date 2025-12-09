@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // Remove deprecated options - they have no effect since MongoDB Driver v4.0.0
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error(`MongoDB Connection Error: ${error.message}`);
+    console.error('Please check your MONGODB_URI environment variable');
+    console.error('Make sure your MongoDB Atlas cluster is accessible and the connection string is correct');
     process.exit(1);
   }
 };

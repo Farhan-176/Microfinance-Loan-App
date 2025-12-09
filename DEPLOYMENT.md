@@ -43,14 +43,21 @@
    - Deploy!
    - Note your Railway URL (e.g., `https://your-app.railway.app`)
 
-4. **Setup MongoDB Atlas**
+4. **Setup MongoDB Atlas** (IMPORTANT!)
    - Go to [mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
-   - Create free cluster
-   - Create database user
-   - Whitelist all IPs (0.0.0.0/0) for production
-   - Get connection string
-   - Replace password in connection string
-   - Use in Railway's MONGODB_URI
+   - Create free cluster (M0)
+   - Create database user with strong password
+   - **Network Access**: Whitelist all IPs (0.0.0.0/0) for production
+   - Click "Connect" → "Connect your application"
+   - Copy connection string (should look like: `mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/dbname?retryWrites=true&w=majority`)
+   - Replace `<password>` with your actual database user password
+   - Replace `dbname` with your database name (e.g., `saylani_microfinance`)
+   - Use complete connection string in Railway's MONGODB_URI
+   
+   **Common Issues:**
+   - Make sure IP whitelist includes 0.0.0.0/0
+   - Ensure password doesn't contain special characters that need URL encoding
+   - Verify cluster is active and not paused
 
 #### Part B: Deploy Frontend to Vercel
 
