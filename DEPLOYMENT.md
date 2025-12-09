@@ -54,10 +54,22 @@
    - Replace `dbname` with your database name (e.g., `saylani_microfinance`)
    - Use complete connection string in Railway's MONGODB_URI
    
+   **Fixing "bad auth: authentication failed" Error:**
+   1. Go to MongoDB Atlas → Database Users
+   2. Verify the username and password are correct
+   3. If password contains special characters (@, !, #, $, %, ^, &, *), you MUST URL-encode them:
+      - Use [URL Encoder](https://www.urlencoder.org/) to encode password
+      - Or manually: @ = %40, ! = %21, # = %23, $ = %24, % = %25, ^ = %5E, & = %26, * = %2A
+   4. Example: if password is `P@ss123`, encode as `P%40ss123` in connection string
+   5. Make sure you're using the SAME database user credentials in the connection string
+   6. Reset password if unsure: MongoDB Atlas → Database Users → Edit → Change Password
+   
    **Common Issues:**
-   - Make sure IP whitelist includes 0.0.0.0/0
-   - Ensure password doesn't contain special characters that need URL encoding
-   - Verify cluster is active and not paused
+   - Password with special characters not URL-encoded
+   - Typo in username or password
+   - IP whitelist doesn't include 0.0.0.0/0 (MongoDB can't authenticate from Railway)
+   - Cluster is paused or deleted
+   - Wrong database user selected (make sure using created database user, not account user)
 
 #### Part B: Deploy Frontend to Vercel
 
