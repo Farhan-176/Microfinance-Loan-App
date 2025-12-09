@@ -7,13 +7,14 @@ const connectDB = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const loanRoutes = require('./routes/loanRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const setupRoutes = require('./routes/setupRoutes');
 
 const app = express();
 
 // Connect to database
 connectDB();
 
-// Middleware - CORS Configuration
+  // Middleware - CORS Configuration
 // Remove trailing slash from FRONTEND_URL to avoid CORS mismatch
 const frontendURL = (process.env.FRONTEND_URL || 'http://localhost:3000').replace(/\/$/, '');
 
@@ -35,6 +36,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/loan', loanRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/setup', setupRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
